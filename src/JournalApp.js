@@ -1,10 +1,16 @@
-import React from 'react'
-import { AppRouter } from './components/routers/AppRouter'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { AppRouter } from './components/routers/AppRouter';
+import { store } from './store/store';
 
 export const JournalApp = () => {
     return (
         <div>
-            <AppRouter />
+            
+            <Provider store ={store}>
+                <AppRouter />
+            </Provider>
+
         </div>
     )
 }
