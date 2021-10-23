@@ -19,7 +19,7 @@ export const RegisterScreen = () => {
      
     const initialForm  = {
         name:'Nicolas',
-        email:'trujillo@example.com',
+        email:'example@example.com',
         password: 12345,
         password2: 12345,
     }
