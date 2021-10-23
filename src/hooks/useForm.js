@@ -19,7 +19,6 @@ export const useForm = ( initialState = {} ) => {
 
     }
     
-    console.log('Cambio 1');
 
     return [ values, handleInputChange, reset ];
 

@@ -1,12 +1,14 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { login, startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
-import { useForm } from '../../hooks/useForm'
+import { startGoogleLogin, startLoginEmailPassword } from '../../actions/auth'
+import { useForm } from '../../hooks/useForm';
+import ReactLoading from 'react-loading';
 
 export const LoginScreen = () => {
 
     const dispatch = useDispatch();
+    const loading = useSelector(state => state.ui.loading);
 
     const [formValues, handleInputChange ]  = useForm({
         email: 'example@example.com',
@@ -15,7 +17,7 @@ export const LoginScreen = () => {
 
     const { email, password } = formValues;
 
-    console.log('Cambio 2');
+    
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -50,13 +52,27 @@ export const LoginScreen = () => {
                     value={ password }
                     onChange={ handleInputChange }
                 />
-                <button
-                    type="submit"
-                    className="btn btn-primary btn-block"
-                    /* disabled={ true } */
-                >
-                    Login
-                </button>
+
+                <div style={{ position:'relative',}}>
+
+                    <button
+                        type="submit"
+                        className="btn btn-primary btn-block"
+                        disabled={ loading }
+                        style={{ height:'28px',}}
+                    >
+                        {
+                            loading
+                            ?
+                                <div className="auth__show-loading">
+                                    <ReactLoading type={'spinningBubbles'} color={'#4285f4'} height={28} width={28} />
+                                </div>
+                            :
+                            <p>Login</p>
+                        }
+                    </button>
+                    
+                </div>
 
                 <hr/>
                 <div className="auth__social-networks">

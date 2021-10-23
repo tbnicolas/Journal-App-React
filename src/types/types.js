@@ -5,7 +5,8 @@ export const types = {
     logout: '[auth] Logout',
     uiSetError: '[UI] setError',
     uiRemoveError: '[UI] setError',
-    loadingAuth:'[loading] Loading', 
+    uiStartLoading:'[UI] Start Loading', 
+    uiFinishLoading:'[UI] Finish Loading', 
 
 }
 
