@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
+import { startRegisterWithEmailPasswordName } from '../../actions/auth';
 import { removeError, setError } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 
@@ -31,10 +32,11 @@ export const RegisterScreen = () => {
 
     const handleRegister = ( e ) => {
         e.preventDefault();
-        console.log( name, email, password, password2 );
+        //console.log( name, email, password, password2 );
 
         if ( isFormValid() ) {
             console.log('Formulario correcto');
+            dispatch(startRegisterWithEmailPasswordName(email,password,name));
         }
     }
 
