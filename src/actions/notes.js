@@ -1,5 +1,6 @@
+import Swal from 'sweetalert2';
 import { db } from "../firebase/firebase-config";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc,updateDoc,doc } from "firebase/firestore";
 import { types } from "../types/types";
 import { loadNotes } from "../helpers/loadNotes";
 
@@ -49,5 +50,43 @@ export const setNotes = ( notes ) => {
     return {
         type: types.notesLoad,
         payload: notes
+    }
+}
+
+
+export const startSaveNote = ( note ) => {
+    return async ( dispatch, getState ) => {
+        const uid = getState().auth.uid;
+        
+        if( !note.url ) {
+            delete note.url;
+        }
+        //Opcion 1
+        const noteToFireStore = { ...note };
+        delete noteToFireStore.id;
+        //Opcion 2
+        /* const { id, ...noteToFireStore} = note; */
+
+        const noteRef = doc(db, `${uid}/journal/notes/${note.id}`);
+        await updateDoc(noteRef,noteToFireStore);
+        
+        dispatch( refreshNote(note.id,noteToFireStore));
+
+        Swal.fire('Saved', note.title,'success');
+
+    }
+}
+
+
+export const  refreshNote = ( id, note ) => {
+    return {
+        type: types.notesUpdated,
+        payload: {
+            id,
+            note: {
+                id,
+                ...note
+            }
+        }
     }
 }
