@@ -56,7 +56,7 @@ export const NoteScreen = () => {
                     &&
                     <div className="notes__images">
                         <img 
-                            src="http://cdn.eso.org/images/screen/millour-01-cc.jpg"
+                            src={note.url}
                             alt="Landscape" 
                         />
                     </div>

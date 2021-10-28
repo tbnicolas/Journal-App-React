@@ -23,11 +23,20 @@ export const startNewNote = () => {
         console.log("Document written with ID: ", doc);
 
         dispatch( activeNote(doc.id, newNote) );
+        dispatch(addLocalNote(doc.id, newNote));
     }
 
 }
 
-
+export const addLocalNote = (id, note) => {
+    return {
+        type: types.addLocalNoteToList,
+        payload: {
+            id,
+            ...note
+        }
+    }
+}
 export const activeNote = ( id, note ) => {
     return {
         type: types.notesActive,
@@ -97,8 +106,18 @@ export const startUploading = ( file ) => {
     
     return async( dispatch,getState )=> {
         const { active:activeNote } = getState().notes;
-
+       /*  Swal.fire({
+            title: 'Uploading...',
+            text: 'Please wait...',
+            allowOutsideClick: false,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();                
+            }
+        }); */
         const fileUrl = await fileUpload( file );
+        activeNote.url = fileUrl;
+        dispatch( startSaveNote(activeNote) );
         console.log(fileUrl);
 
     }

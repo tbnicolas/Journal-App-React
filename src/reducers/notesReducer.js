@@ -37,6 +37,14 @@ export const notesReducer = ( state = initialState, action ) => {
             }
         };
 
+        case types.addLocalNoteToList:
+            
+            return{
+                ...state,
+                notes: [...state.notes, action.payload],
+            };
+        
+
         case types.notesLoad:
             
         return{
@@ -45,7 +53,6 @@ export const notesReducer = ( state = initialState, action ) => {
         };
 
         case types.notesUpdated:
-            
         return{
             ...state,
             notes: state.notes.map(

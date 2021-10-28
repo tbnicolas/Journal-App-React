@@ -10,6 +10,7 @@ export const types = {
     uiStartLoading:'[UI] Start Loading', 
     uiFinishLoading:'[UI] Finish Loading', 
 
+    addLocalNoteToList: '[Notes] add note to list',
     notesAddNew: '[Notes] New note',
     notesActive: '[Notes] set active note',
     notesLoad: '[Notes] Load notes',
